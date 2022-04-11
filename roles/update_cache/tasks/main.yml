@@ -1,0 +1,7 @@
+---
+- name: Update update packages and cache.
+  tags: ["always"]
+  ansible.builtin.apt:
+    state: fixed
+    update_cache: yes
+    cache_valid_time: 86400

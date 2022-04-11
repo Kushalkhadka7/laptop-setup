@@ -1,0 +1,8 @@
+---
+- hosts: ubuntu
+  become: yes
+
+  roles:
+    - role: update_cache
+    - role: chrome
+    - role: nodejs

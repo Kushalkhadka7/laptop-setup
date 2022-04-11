@@ -1,0 +1,25 @@
+---
+# Task file to update python version and install pip3.
+
+- name: Check which version of python is installed.
+  raw: test -e /usr/bin/python
+  changed_when: false
+  failed_when: false
+  register: python_installed
+
+- name: Install new python version
+  apt:
+    name: python3.9
+    state: present
+  when: python_installed.rc != 0
+
+- name: Verify pip is installed
+  command: "pip3 --version"
+  register: is_pip_installed
+  ignore_errors: true
+
+- name: Install pip3
+  apt:
+    name: python3-pip
+    state: present
+  when: is_pip_installed.rc != 0
